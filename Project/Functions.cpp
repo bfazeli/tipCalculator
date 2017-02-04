@@ -36,4 +36,28 @@ void DoublyList::switchEveryTwo()
 			first = temp->getPreviousLink();
 			i = 1;
 		}
+
+		while (temp != NULL && i < count)	// Loop through the list
+		{
+			if (i == 0)		// Swap the first two nodes
+			{
+				temp->setPreviousLink(temp->getNextLink());
+				temp->getPreviousLink()->setPreviousLink(NULL);
+				temp->setNextLink(temp->getNextLink()->getNextLink());
+				temp->getPreviousLink()->setNextLink(temp);
+				temp->getNextLink()->setPreviousLink(temp);
+
+				first = temp->getPreviousLink();
+			}
+			else if (i < count - 2)		// Swap every other node in the middle
+			{
+				temp->getPreviousLink()->setNextLink(temp->getNextLink());
+				temp->getNextLink()->setPreviousLink(temp->getPreviousLink());
+				temp->setPreviousLink(temp->getNextLink());
+				temp->setNextLink(temp->getPreviousLink()->getNextLink());
+				temp->getPreviousLink()->setNextLink(temp);
+				temp->getNextLink()->setPreviousLink(temp);
+			}
+		}
+	}
 }
