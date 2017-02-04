@@ -58,6 +58,18 @@ void DoublyList::switchEveryTwo()
 				temp->getPreviousLink()->setNextLink(temp);
 				temp->getNextLink()->setPreviousLink(temp);
 			}
+			else		// Swap the last two nodes
+			{
+				temp->getPreviousLink()->setNextLink(temp->getNextLink());
+				temp->getNextLink()->setPreviousLink(temp->getPreviousLink());
+				temp->setPreviousLink(temp->getNextLink());
+				temp->getPreviousLink()->setNextLink(temp);
+				temp->setNextLink(nullptr);
+
+				last = temp;
+			}
+			i += 2;
+			temp = temp->getNextLink();
 		}
 	}
 }
